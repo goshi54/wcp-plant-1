@@ -1,0 +1,29 @@
+<div class="container">
+
+  <div class="row">
+    <div class="h5 my-3 text-center theme col-2">会員一覧</div>
+
+    <table class="col-11 table">
+      <thead class="table-dark text-center">
+        <th>会員ID</th>
+        <th>氏名</th>
+        <th>メールアドレス</th>
+        <th>ステータス</th>
+      </thead>
+      <tbody class="text-center">
+        <% @customers.each do |customer| %>
+        <tr>
+          <td><%= customer.id %></td>
+          <td><%= link_to customer.name, admin_customer_path(customer) %></td>
+          <td><%= customer.email %></td>
+          <td class=<%= customer.is_deleted ? "resign" : "valid" %>>
+            <strong><%= customer.is_deleted ? "退会" : "有効" %></strong>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<%= paginate @customers %>

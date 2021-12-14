@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row justify-content-end">
+    <div class="h5 my-3 text-center theme col-3">ショッピングカート</div>
+    <div class="col-lg-8 text-right">
+      <%= link_to "カートを空にする", cart_items_destroy_all_cart_items_path, method: :delete, class:"btn btn-sm btn-danger" %>
+    </div>
+    <table class="col table table-bordered">
+      <thead  class="text-center">
+        <tr>
+          <td class="col-3 theme">商品名</td>
+          <td class="col-1 theme">単価（税込）</td>
+          <td class="col-1 theme">数量</td>
+          <td class="col-1 theme">小計</td>
+          <td class="col-1 theme"></td>
+        </tr>
+      </thead>
+      <% @carts.each do |cart| %>
+      <tbody>
+        <tr>
+          <td><%= attachment_image_tag(item.item, :image, :fill, 50, 50, fallback: "no_image.jpg", size: "60x45") %>
+              <%= item.item.name %></td>
+          <td class="align-middle"><%= (item.item.price*1.1).floor %></td>
+          <td class="align-middle"><%= form_with model: item, local:true do |f| %>
+              <%= f.select :quantity, [*(1..20)] %>
+              <%= f.submit "変更", class: "btn btn-success btn-sm" %>
+              <% end %>
+          </td>
+          <td class="align-middle"><%= (item.quantity * (item.item.price*1.1).floor).to_s(:delimited) %></td>
+          <td class="align-middle justify-content-center"><%= link_to "削除する", cart_path(item), method: :delete, class:"btn btn-sm btn-danger" %></td>
+        </tr>
+      </tbody>
+        <% end %>
+      </table>
+  </div>
+
+  <div class="row justify-content-end  mt-5">
+    <div class="col-lg-3 mt-3">
+      <%= link_to "買い物を続ける", root_path, class:"btn btn-sm btn-primary" %>
+    </div>
+
+      <table class="col table-bordered offset-7">
+        <td class="col-3 pt-3 pb-3 pl-1" style="background-color: #EEEEEE;">合計金額</td>
+        <td class="col-1"><%= @total.round.to_s(:delimited)%></td>
+      </table>
+  </div>
+  <div class="row justify-content-center mt-5">
+    <% if @carts.present? %>
+      <%= link_to "情報入力に進む", new_order_path,  class:"btn btn-success" %>
+    <% end %>
+  </div>
+  </div>

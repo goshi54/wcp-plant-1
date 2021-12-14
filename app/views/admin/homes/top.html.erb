@@ -1,0 +1,35 @@
+<div class="container">
+
+  <div class="row">
+    <div class="h5 my-3 text-center theme col-2">注文履歴一覧</div>
+
+    <table class="col-11 table">
+      <thead class="table-dark text-center">
+        <tr>
+          <th style="width: 20%">購入日時</th>
+          <th style="width: 20%">購入者</th>
+          <th style="width: 15%">注文個数</th>
+          <th style="width: 30%">注文ステータス</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <% @orders.each do |o| %>
+          <% @total_quantity = 0 %>
+          <% order_details = OrderDetail.where(order_id: o.id) %>
+          <% order_details.each do |order_d| %>
+          <% @total_quantity += order_d.quantity %>
+          <% end %>
+        <tr>
+          <td><%= link_to admin_order_path(o) do %>
+              <%= o.created_at.strftime("%Y/%m/%d %T") %><% end %></td>
+          <td><%= o.full_name %></td>
+          <td><%= @total_quantity %></td>
+          <td><%= o.status_i18n %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<%= paginate @orders %>

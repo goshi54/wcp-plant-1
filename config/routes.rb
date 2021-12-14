@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   sessions: 'public/sessions'
 }
 
+
+
   #customer側↓
 
   scope module: :customer do
@@ -22,11 +24,7 @@ Rails.application.routes.draw do
       patch 'customers/withdraw' => 'customers#withdraw'
 
     #商品
-    resources :items, only: [:index, :show] do
-      collection do
-
-      end
-    end
+    resources :items, only: [:index, :show]
 
     #注文
     resources :orders, only: [:index, :show, :create, :new] do
@@ -52,16 +50,11 @@ Rails.application.routes.draw do
     #カスタマー
     resources :customers, only:[:index, :show, :edit, :update]
 
-    #ジャンル
-    resources :genres, only:[:index, :edit, :create, :update]
-
     #商品
-    resources :products, except:[:destroy]
+    resources :items, except:[:destroy]
 
     #注文
     resources :orders, only:[:show, :update]
 
-    #注文詳細
-    resources :order_details, only:[:update]
- end
+  end
 end

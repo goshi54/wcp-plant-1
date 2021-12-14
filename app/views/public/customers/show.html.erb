@@ -1,0 +1,55 @@
+<div class="container mt-3 mb-3">
+  <div class="row">
+    <div class="col-md-6">
+
+      <div class="offset-3 mb-5">
+        <h2>マイページ</h2>
+      </div>
+
+      <div class="row mb-3">
+        <h4 class="col-3">登録情報</h4>
+        <p><%= link_to "　編集する　", edit_customers_path, class:"btn btn-sm btn-success" %></p>
+      </div>
+
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th class="col-4">氏名</th>
+            <th><%=current_customer.name %></th>
+          </tr>
+          <tr>
+            <th>カナ</th>
+            <th><%=current_customer.name_kana %>></th>
+          </tr>
+          <tr>
+            <th>郵便番号</th>
+            <th><%=current_customer.postal_code %></th>
+          </tr>
+          <tr>
+            <th>住所</th>
+            <th><%=current_customer.address %></th>
+          </tr>
+          <tr>
+            <th>電話番号</th>
+            <th><%=current_customer.phone_number %></th>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <th><%=current_customer.email %></th>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row mt-4">
+        <h4 class="col-3">配送先</h4>
+        <p><%= link_to "　一覧を見る　", addresses_path, class:"btn btn-sm btn-primary" %></p>
+      </div>
+      <div class="row">
+        <h4 class="col-3">注文履歴</h4>
+        <p><%= link_to "　一覧を見る　", orders_path, class:"btn btn-sm btn-primary" %></p>
+      </div>
+
+
+    </div>
+  </div>
+</div>

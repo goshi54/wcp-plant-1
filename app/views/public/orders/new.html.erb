@@ -1,0 +1,52 @@
+<div class="container">
+  <%= render "customer/shared/error_messages", resource: @order %>
+  <p>注文情報入力</p>
+  <%= form_with model: @order, url: { action: :confirm }, local: true do |f| %>
+    <div class="row">
+      <p>支払方法</p>
+    </div>
+    <div class="ml-4">
+      <%= f.radio_button :payment_way, 'credit_card' %>
+      <%= f.label :payment_way, :クレジットカード %>
+    </div>
+    <div class="ml-4">
+      <%= f.radio_button :payment_way, 'transfer' %>
+      <%= f.label :payment_way, :銀行振込 %>
+    </div>
+
+    <div class="row">
+      <p>お届け先</p>
+    </div>
+
+    <div class="ml-4">
+      <%= f.radio_button :address_number, 1 %>
+      <%= f.label :address_number_1, "ご自身の住所" %><div class="w-100"></div>
+      <p class="ml-3 mb-0">〒<%= current_customer.postal_code %> <%= current_customer.address %></p><div class="w-100"></div>
+      <p class="ml-3"><%= current_customer.name %></p>
+
+      <%= f.radio_button :address_number, 2 %>
+      <%= f.label :address_number_2, "登録済住所から選択" %><div class="w-100"></div>
+      <div class="ml-3 mb-10"><%= f.select :address_id, options_from_collection_for_select(current_customer.shipping_addresses.all, :id, :full_address) %></div>
+      <%= f.radio_button :address_number, 3 %>
+      <%= f.label :address_number_3, "新しいお届け先" %>
+      <div class="ml-3">
+        <div class="mb-2">
+          <%= f.label :郵便番号（ハイフンなし）, class:"control-label col-3" %>
+          <%= f.text_field :postal_code, autofocus: true, class:"col-2", :placeholder => "0000000" %>
+        </div>
+        <div class="mb-2">
+          <%= f.label :住所, class:"control-label col-3" %>
+          <%= f.text_field :address, class:"col-5", :placeholder => "東京都渋谷区代々木神園町0-0" %>
+        </div>
+        <div>
+           <%= f.label :宛名, class:"control-label col-3" %>
+           <%= f.text_field :name, class:"col-2", :placeholder => "令和道子" %>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <%= f.submit "確認画面へ進む", class: "btn btn-primary mt-5" %>
+    </div>
+  <% end %>
+</div>
+

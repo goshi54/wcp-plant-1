@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="mb-3 pl-3">
+        <h1>商品一覧<font size="5">（全<%= @items_all.count %>件）</font></h1>
+      </div>
+
+      <% @itemss.each do |item| %>
+        <div class="col-md-3 mb-5" style="float: left;">
+          <div class="card">
+            <%= attachment_image_tag item, :image, :fill, 200, 200, fallback:"noimage_product.jpg"%>
+            <p class= "mt-3"><%= link_to item.name, item_path(item.id) %></p>
+
+            <% if item.is_active == false %>
+              <p class="text-danger">売り切れ</p>
+            <% else %>
+              <p>￥<%= (item.price*1.1).floor %></p>
+            <% end %>
+
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="pagination mb-3">
+      <font size="5"><%= paginate @items %></font>
+  </div>
+
+</div>

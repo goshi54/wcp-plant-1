@@ -4,7 +4,7 @@ class Public::CartsController < ApplicationController
   def index
     @carts = current_customer.carts
     # カートに入ってる商品の合計金額
-    @total = @carts.inject(0) { |sum, item| sum + (item.sum_of_price*1.1).floor }
+    @total = @carts.inject(0) { |sum, item| sum + (item.sum_of_price*1.1) }
   end
 
   def destroy_all
@@ -29,13 +29,13 @@ class Public::CartsController < ApplicationController
 
   def create
       @carts = current_customer.carts
-      @cart = CartProduct.new(cart_params)
+      @cart = Cart.new(cart_params)
       if current_customer.carts.find_by(item_id: params[:cart][:item_id]).present?
         add_item = current_customer.carts.find_by(item_id: params[:cart][:item_id])
         add_item.quantity += params[:cart][:quantity].to_i
         add_item.save
         redirect_to carts_path
-      else @cart.save
+      else @cart.save!
         redirect_to carts_path
       end
   end

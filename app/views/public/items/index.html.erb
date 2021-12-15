@@ -5,7 +5,7 @@
         <h1>商品一覧<font size="5">（全<%= @items_all.count %>件）</font></h1>
       </div>
 
-      <% @itemss.each do |item| %>
+      <% @items.each do |item| %>
         <div class="col-md-3 mb-5" style="float: left;">
           <div class="card">
             <%= attachment_image_tag item, :image, :fill, 200, 200, fallback:"noimage_product.jpg"%>

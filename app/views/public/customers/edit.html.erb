@@ -1,0 +1,55 @@
+<div class="container offset-1 mt-3 mb-3">
+
+  <div class="row  mt-5 mb-5">
+    <div class="offset-1"></div>
+    <h2>会員情報編集</h2>
+  </div>
+
+    <%= form_with model: @customer, url: customers_update_path, method: :PATCH do |f| %>
+    <%#= render "customer/shared/error_messages", resource: resource %>
+    <table class="table table-borderless">
+      <tr>
+        <td><%= f.label "氏名" %></td>
+        <td><%= f.text_field :name, class: "form-control" %></td>
+      </tr>
+
+      <tr>
+        <td><%= f.label "フリガナ" %></td>
+        <td><%= f.text_field :name_kana, class: "form-control" %></td>
+      </tr>
+
+      <tr>
+        <td><%= f.label "郵便番号" %></td>
+        <td><%= f.text_field :postcode, class: "form-control" %></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td><%= f.label "住所" %></td>
+        <td colspan="2"><%= f.text_field :address, class: "form-control" %></td>
+      </tr>
+
+      <tr>
+        <td><%= f.label "電話番号" %></td>
+        <td><%= f.text_field :tel, class: "form-control" %></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td><%= f.label "メールアドレス" %></td>
+        <td><%= f.text_field :email, class: "form-control" %></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td><%= f.submit '編集内容を保存',class: "btn btn-success rounded-pill mt-3" %></td>
+        <td><%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-danger rounded-pill mt-3" %></td>
+      </tr>
+    </table>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

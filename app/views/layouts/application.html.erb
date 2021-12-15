@@ -1,27 +1,120 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Plant</title>
+    <title>PlLANT</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/7d6d903ecb.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!--Font Awesome-->
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <!--フォント-->
+
   </head>
 
   <body>
-    <% if customer_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_customer_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_customer_session_path %>
-      </li>
-    <% end %>
+
+
+    <header style="font-family: 'Noto Sans JP',serif;">
+      <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark" id="navbarHeader">
+        <a class="navbar-brand" href="/"><span>PLANT</span></a>
+        <div class="container">
+          <div class="navbar navbar-dark shadow-sm">
+            <div class="container d-flex justify-content-between">
+              <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+
+            <% if admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to admin_items_path, class: 'nav-link text-light  ml-2' do %>
+                <i class="fas fa-boxes"></i>商品一覧
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to admin_customers_path, class: 'nav-link text-light  ml-2' do %>
+                <i class="fas fa-users"></i>会員一覧
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to admin_root_path, class: 'nav-link text-light  ml-2' do %>
+                <i class="fas fa-server"></i>注文履歴一覧
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to destroy_admin_session_path, class: 'nav-link text-light  ml-2', method: :delete do %>
+                <i class="fas fa-sign-out-alt"></i>ログアウト
+                <% end %>
+              </li>
+            <% elsif customer_signed_in? %>
+              <span class="mt-2" style="color: white;">ようこそ、<%= current_customer.name %>さん</span>
+              <li class="nav-item">
+                <%= link_to customers_my_page_path, class: 'nav-link text-light  ml-2' do %>
+                <i class="fas fa-user"></i>マイページ
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to items_path, class: 'nav-link text-light  ml-2' do %>
+                <i class="fas fa-boxes"></i>商品一覧
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to carts_path, class: 'nav-link text-light  ml-2' do %>
+                <i class="fas fa-shopping-basket"></i>カート
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to destroy_customer_session_path, class: 'nav-link text-light  ml-2', method: :delete do %>
+                <i class="fas fa-sign-out-alt"></i>ログアウト
+                <% end %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to about_path, class: 'nav-link text-light  ml-2' do %>
+                <i class="far fa-grin-alt"></i>About
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to items_path, class: 'nav-link text-light  ml-2' do %>
+                <i class="fas fa-boxes"></i>商品一覧
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_customer_registration_path, class: 'nav-link text-light  ml-2' do %>
+                <i class="fas fa-user-plus"></i>新規登録
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_customer_session_path, class: 'nav-link text-light  ml-2' do %>
+                <i class="fas fa-sign-in-alt"></i>ログイン
+                <% end %>
+              </li>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
     <%= yield %>
+    </main>
+
+    <footer class="text-white text-center">
+      <div class="container">
+          <div class="mx-auto">
+            <p class="pt-3" style="font-size:15px;">
+            </p>
+            <p style="font-size:12px;">Copyright ©naganocake All Rights Reserved.</p>
+          </div>
+      </div>
+    </footer>
   </body>
 </html>

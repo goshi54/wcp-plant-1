@@ -1,5 +1,5 @@
 <div class="container">
-  <%= render "customer/shared/error_messages", resource: @order %>
+  <%#= render "customer/shared/error_messages", resource: @order %>
   <p>注文情報入力</p>
   <%= form_with model: @order, url: { action: :confirm }, local: true do |f| %>
     <div class="row">
@@ -24,11 +24,6 @@
       <p class="ml-3 mb-0">〒<%= current_customer.postal_code %> <%= current_customer.address %></p><div class="w-100"></div>
       <p class="ml-3"><%= current_customer.name %></p>
 
-      <%= f.radio_button :address_number, 2 %>
-      <%= f.label :address_number_2, "登録済住所から選択" %><div class="w-100"></div>
-      <div class="ml-3 mb-10"><%= f.select :address_id, options_from_collection_for_select(current_customer.shipping_addresses.all, :id, :full_address) %></div>
-      <%= f.radio_button :address_number, 3 %>
-      <%= f.label :address_number_3, "新しいお届け先" %>
       <div class="ml-3">
         <div class="mb-2">
           <%= f.label :郵便番号（ハイフンなし）, class:"control-label col-3" %>

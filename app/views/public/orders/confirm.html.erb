@@ -16,7 +16,7 @@
           <tr>
             <td class="font-weight-bold p-1 col-6">
                 <%= attachment_image_tag(cart.item, :image, :fill, 50, 50 , size: "60x40", class: "mr-3") %>
-                <%= cart.item.name %>
+                <%= cart.item.item_name %>
             </td>
             <td><%= ((cart.item.price*1.1).floor).to_s(:delimited) %></td>
             <td><%= cart.quantity %></td>
@@ -48,7 +48,7 @@
 
    <div class="row">
      <p class="col-lg-1 align-self-start font-weight-bold">支払方法</p>
-     <div class="col-lg-10"><%= @order.payment_way_i18n %></div>
+     <div class="col-lg-10"><%#= @order.payment_way_i18n %></div>
    </div>
    <div class="row">
       <p class="col-lg-1 align-self-start font-weight-bold">お届け先</p>

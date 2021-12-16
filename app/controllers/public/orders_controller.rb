@@ -22,15 +22,16 @@ class Public::OrdersController < ApplicationController
     if carts.present?
       if @order.save
         carts.each do |cart|
-          order_detail = OrderDetail.new
-          order_detail.product_id = cart.product_id
-          order_detail.order_id = @order.id
-          order_detail.quantity = cart.quantity
-          order_detail.price = (cart.product.price*1.1).floor
-          order_detail.save
+          order = Order.new
+          order.item_id = cart.item_id
+          order_id = @order.id
+          #order.quantity = cart.quantity
+          #order.price = cart.item.price*1.1
+          order.save
         end
         redirect_to complete_orders_path
-        cart_products.destroy_all
+        carts.destroy_all
+
       else
         @order = Order.new(order_params)
         render :new
@@ -45,7 +46,7 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    carts = current_customer.cart_products
+    carts = current_customer.carts
     unless carts.present?
       redirect_to products_path
     end
@@ -53,12 +54,12 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = current_customer.orders.new(order_params)
-    @cart_products = current_customer.cart_products.all
-    @total = @cart_products.inject(0) { |sum, item| sum + (item.sum_of_price*1.1).floor }
+    @carts = current_customer.carts.all
+    @total = @carts.inject(0) { |sum, item| sum + (item.sum_of_price*1.1).floor }
     @order.cost = 800
     @order.total_price = (@total.to_i + @order.cost)
   if params[:order][:address_number] == "1"
-    @order.name = current_customer.last_name. + current_customer.first_name
+    @order.name = current_customer.name
     @order.address = current_customer.address
     @order.postal_code = current_customer.postal_code
   elsif params[:order][:address_number] == "2"
@@ -86,7 +87,7 @@ class Public::OrdersController < ApplicationController
 
 
   def order_params
-    params.require(:order).permit(:customer_id, :name, :address, :total_price, :payment_way, :postal_code, :address, :cost)
+    params.require(:order).permit(:customer_id, :name, :address, :postal_code, :total_price, :payment_way, :tax_price)
   end
 
 

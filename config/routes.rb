@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get 'customers/unsubscribe'
     patch 'customers/withdraw'
 
+      resources :comments, only: [:index, :new, :create, :destroy]
       resources :items, only: [:index, :show]
       resources :orders, only: [:index, :show, :new, :create] do
         collection do
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
           get 'complete'
         end
       end
-      resources :carts, only: [:index, :create, :update, :destory] do
+      resources :carts, only: [:index, :create, :update, :destroy] do
         collection do
         delete 'destroy_all'
       end

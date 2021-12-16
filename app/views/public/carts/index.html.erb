@@ -17,16 +17,17 @@
       <% @carts.each do |cart| %>
       <tbody>
         <tr>
-          <td><%= attachment_image_tag(item.item, :image, :fill, 50, 50, fallback: "no_image.jpg", size: "60x45") %>
-              <%= item.item.name %></td>
-          <td class="align-middle"><%= (item.item.price*1.1).floor %></td>
-          <td class="align-middle"><%= form_with model: item, local:true do |f| %>
+          <td><%= attachment_image_tag cart.item, :image, :fill, 50, 50, fallback: "no_image.jpg", size: "60x45" %>
+              <%= cart.item.item_name %></td>
+          <td class="align-middle"><%= (cart.item.price*1.1) %></td>
+          <td class="align-middle"><%= form_with model: cart, local:true do |f| %>
               <%= f.select :quantity, [*(1..20)] %>
               <%= f.submit "変更", class: "btn btn-success btn-sm" %>
               <% end %>
           </td>
-          <td class="align-middle"><%= (item.quantity * (item.item.price*1.1).floor).to_s(:delimited) %></td>
-          <td class="align-middle justify-content-center"><%= link_to "削除する", cart_path(item), method: :delete, class:"btn btn-sm btn-danger" %></td>
+          <td class="align-middle"><%#= (item.quantity * (cart.item.price*1.1).floor).to_s(:delimited) %>
+          <%= cart.item.price * 1.1 * cart.quantity %></td>
+          <td class="align-middle justify-content-center"><%= link_to "削除する", cart_path(cart), method: :delete, class:"btn btn-sm btn-danger" %></td>
         </tr>
       </tbody>
         <% end %>

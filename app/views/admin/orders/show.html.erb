@@ -1,0 +1,57 @@
+<div class="container">
+
+  <div class="row">
+    <div class="my-3 h5 text-center theme col-2 offset-md-1">注文履歴詳細</div>
+
+
+      <table class="col-12 table-sm table-borderless">
+        <tr><th style="width: 15%">購入者</th>
+            <td style="width: 85%"><%= link_to admin_customer_path(@order.customer_id) do %>
+                <%= @order.name %><% end %></td></tr>
+        <tr><th>注文日</th><td><%= @order.created_at.strftime("%Y/%m/%d") %></td></tr>
+        <tr><th>配送先</th><td><%= @order.postal_code %> <%= @order.address %><br><%= @order.name %></td></tr>
+        <tr><th>支払方法</th><td><%= @order.payment_way_i18n %></td></tr>
+        <tr><th>注文ステータス</th>
+            <td><%= form_with model: [:admin,@order],local:true do |f| %>
+                <%= f.select :status,[ ["入金待ち","waiting"], ["入金確認","confirmed"], ["製作中","working"], ["発送準備中","preparing"], ["発送済み","shipped"] ],{}, { class:"form-control-sm" } %>
+                &emsp;&emsp;<%= f.submit '更新', class:"btn btn-sm btn-success" %>
+                <% end %></td></tr>
+      </table>
+
+    <div class="col-8 mt-4">
+      <table class="table">
+        <thead class="table-dark text-center">
+          <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>制作ステータス</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+            <% @order_details.each do |order_d| %>
+            <tr>
+              <td><%= order_d.product.name %></td>
+              <td><%= order_d.price %></td>
+              <td><%= order_d.quantity %></td>
+              <td><%= order_d.price * order_d.quantity %></td>
+              <td><%= form_with model: [:admin,order_d], local:true do |f| %>
+                  <%= f.select :create_status,[ ["製作不可","0"], ["製作待ち","1"], ["製作中","2"], ["製作完了","3"] ],{}, { class:"form-control-sm" } %>
+                  &emsp;&emsp;<%= f.submit '更新', class:"btn btn-sm btn-success"%><% end %></td>
+            </tr>
+            <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-3 ml-4 d-flex align-items-end">
+      <table class="table-sm mb-0 table-borderless">
+        <tr><th>商品合計</th><td><%= @order_total %>円</td></tr>
+        <tr><th>送料</th><td><%= @order.cost %>円</td></tr>
+        <tr><th>請求金額合計</th><td><%= @order_total.to_i + @order.cost %>円</td></tr>
+      </table>
+    </div>
+
+  </div>
+</div>

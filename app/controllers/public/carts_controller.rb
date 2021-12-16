@@ -35,7 +35,7 @@ class Public::CartsController < ApplicationController
         add_item.quantity += params[:cart][:quantity].to_i
         add_item.save
         redirect_to carts_path
-      else @cart.save!
+      else @cart.save
         redirect_to carts_path
       end
   end

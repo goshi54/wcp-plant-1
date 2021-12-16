@@ -6,6 +6,7 @@ class Public::ItemsController < ApplicationController
     @q = Item.ransack(params[:q])
   end
 
+
   def show
     @item = Item.find(params[:id])
     @cart = Cart.new

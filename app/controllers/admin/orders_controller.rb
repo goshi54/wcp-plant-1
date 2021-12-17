@@ -1,11 +1,11 @@
-class Admin::OrdersController <
+class Admin::OrdersController < ApplicationController
   before_action :authenticate_admin!
 
   def show
     @order = Order.find(params[:id])
-    @order_details = OrderDetail.where(order_id: params[:id])
+    @orders = Order.where(order_id: params[:id])
     @order_total = 0
-    @order_total += (o.price * o.quantity)
+    @order_total += (order.price * order.quantity)
   end
 
 

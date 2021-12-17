@@ -1,17 +1,33 @@
-<table>
-  <% @item.comments.each do |comment| %>
-    <% comment_customer = comment.customer %>
-    <tr>
-    	<td>
-        <%= comment.customer.name %>
-        <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+<div class="container">
+  <div class="row justify-content-end">
+    <div class="h5 my-3 text-center theme col-3">コメント一覧</div>
+    <div class="col-lg-8 text-right">
 
-      </td>
-    	<td><%= comment.comment %></td>
-    	<% if current_customer == comment_customer %>
-      	<td><%= link_to 'Destroy', comment_path(comment.id), class: 'btn-sm btn-danger', method: :delete %></td>
-    	<% end %>
-    </tr>
-  <% end %>
-</table>
- <%= link_to "コメント投稿", new_comment_path(item_id: @item.id), class:"btn btn-sm btn-primary" %>
+    <table class="col table table-bordered">
+      <thead  class="text-center">
+        <tr>
+          <td class="col-1 theme">日付</td>
+          <td class="col-1 theme">タイトル</td>
+          <td class="col-1 theme">コメント</td>
+
+        </tr>
+      </thead>
+      <% @item.comments.each do |comment| %>
+        <% comment_customer = comment.customer %>
+        <tr>
+        	<td>
+            <%= comment.customer.name %>
+            <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+
+          </td>
+        	<td><%= comment.comment %></td>
+        	<% if current_customer == comment_customer %>
+          	<td><%= link_to 'Destroy', comment_path(comment.id), class: 'btn-sm btn-danger', method: :delete %></td>
+        	<% end %>
+        </tr>
+      <% end %>
+    </table>
+     <%= link_to "コメント投稿", new_comment_path(item_id: @item.id), class:"btn btn-sm btn-primary" %>
+     </div>
+   </div>
+ </div>

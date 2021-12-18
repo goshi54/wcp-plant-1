@@ -15,7 +15,7 @@
         <% @carts.each do |cart| %>
           <tr>
             <td class="font-weight-bold p-1 col-6">
-                <%= attachment_image_tag(cart.item, :image, :fill, 50, 50 , size: "60x40", class: "mr-3") %>
+                <%= attachment_image_tag(cart.item, :image, size: "100x100" , size: "60x40", class: "mr-3") %>
                 <%= cart.item.item_name %>
             </td>
             <td><%= ((cart.item.price*1.1).floor).to_s(:delimited) %></td>

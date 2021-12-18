@@ -3,7 +3,7 @@
 
     <!-- 商品画像 -->
     <div class="col-md-4 text-center">
-        <%= attachment_image_tag @item, :image, :fill, 200, 200, fallback:"no_image.jpg" %>
+        <%= attachment_image_tag @item, :image, size: "200x200", fallback:"no_image.jpg" %>
     </div>
 
 
@@ -12,7 +12,7 @@
       <h2><%= @item.item_name %></h2><br>
       <p><%= @item.explanation %></p>
       <div>
-        <h3>￥<%=(@item.price*1.1) %><font size="3">（税込）</font></h3>
+        <h3>￥<%=(@item.price*1.1).round(0)  %><font size="3">（税込）</font></h3>
       </div>
 
         <!-- 個数選択・決定ボタン（非ログイン時は隠れます）-->

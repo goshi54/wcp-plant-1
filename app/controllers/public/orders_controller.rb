@@ -7,7 +7,7 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order.cost = 800 #送料
+    @order.cost = 500 #送料
     @order_items_price = (@order.total_price.to_i - @order.cost)
 
   end
@@ -16,7 +16,7 @@ class Public::OrdersController < ApplicationController
     @order = current_customer.orders.new(order_params)
     @carts_all = current_customer.carts.all
     @total = @carts_all.inject(0) { |sum, item| sum + (item.sum_of_price*1.1).floor } # カートに入ってる商品の合計金額
-    @order.cost = 800 #送料
+    @order.cost = 500 #送料
     @order.total_price = (@total.to_i + @order.cost)
     if @carts_all.present?
       if @order.save!
@@ -55,7 +55,7 @@ class Public::OrdersController < ApplicationController
     @order = current_customer.orders.new(order_params)
     @carts = current_customer.carts.all
     @total = @carts.inject(0) { |sum, item| sum + (item.sum_of_price*1.1).floor }
-    @order.cost = 800
+    @order.cost = 500
     @order.total_price = (@total.to_i + @order.cost)
   if params[:order][:address_number] == "1"
     @order.name = current_customer.name

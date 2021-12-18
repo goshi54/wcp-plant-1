@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_18_070556) do
+ActiveRecord::Schema.define(version: 2021_12_18_065025) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 2021_12_18_070556) do
   create_table "carts", force: :cascade do |t|
     t.integer "item_id"
     t.integer "customer_id"
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "quantity"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -48,14 +48,15 @@ ActiveRecord::Schema.define(version: 2021_12_18_070556) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "is_deleted", default: false
-    t.string "phone_number"
     t.string "name_kana"
     t.string "postal_code"
     t.string "address"
+    t.string "phone_number"
+    t.boolean "is_active"
+    t.string "name"
+    t.boolean "is_deleted", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
@@ -65,11 +66,11 @@ ActiveRecord::Schema.define(version: 2021_12_18_070556) do
     t.integer "customer_id"
     t.text "explanation"
     t.string "item_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "is_active"
     t.string "image_id"
     t.integer "price"
+    t.boolean "is_active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "order_details", force: :cascade do |t|
@@ -87,15 +88,15 @@ ActiveRecord::Schema.define(version: 2021_12_18_070556) do
     t.string "freight"
     t.string "tax_price"
     t.integer "item_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name"
     t.string "postal_code"
+    t.string "name"
     t.string "address"
     t.integer "cost"
     t.integer "total_price"
     t.integer "payment_way"
     t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

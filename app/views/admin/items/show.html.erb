@@ -6,7 +6,7 @@
 
   <div class="row">
     <div class="mt-5 col-4 text-center">
-      <%= attachment_image_tag @item, :image, :fill, 300, 300, fallback:"no_image.jpg" %>
+      <%= attachment_image_tag @item, :image, size: "200x200", fallback:"no_image.jpg" %>
     </div>
 
     <table class="table table-borderless mt-5 ml-3 col-7">
@@ -15,7 +15,7 @@
       <tr><td>商品説明</td>
         <td><%= @item.explanation %></td></tr>
       <tr><td>税込価格<br>(税抜価格)</td>
-        <td><%= (@item.price * 1.1) %> (<%= @item.price %>)</td></tr>
+        <td><%= (@item.price * 1.1).round(0) %> (<%= @item.price %>)</td></tr>
       <tr><td>販売ステータス</td>
         <td style="font-size: 20px; font-weight: bold" class=<%= @item.is_active ? "sale" : "sold" %>>
           <%= @item.is_active ? "販売中" : "販売停止中" %></td></tr>

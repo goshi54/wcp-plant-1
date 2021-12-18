@@ -5,8 +5,10 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.integer :customer_id
       t.text :explanation
       t.string :item_name
-      t.string :item_image
-      t.string :price
+      t.string :image_id
+      t.integer :price
+      t.boolean :is_active
+      
 
       t.timestamps
     end

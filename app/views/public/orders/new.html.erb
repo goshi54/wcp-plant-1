@@ -20,25 +20,11 @@
 
     <div class="ml-4">
       <%= f.radio_button :address_number, 1 %>
-      <%= f.label :address_number_1, "ご自身の住所" %><div class="w-100"></div>
+      <%= f.label :address_number_1, "お届け先住所" %><div class="w-100"></div>
       <p class="ml-3 mb-0">〒<%= current_customer.postal_code %> <%= current_customer.address %></p><div class="w-100"></div>
       <p class="ml-3"><%= current_customer.name %></p>
 
-      <div class="ml-3">
-        <div class="mb-2">
-          <%= f.label :郵便番号（ハイフンなし）, class:"control-label col-3" %>
-          <%= f.text_field :postal_code, autofocus: true, class:"col-2", :placeholder => "0000000" %>
-        </div>
-        <div class="mb-2">
-          <%= f.label :住所, class:"control-label col-3" %>
-          <%= f.text_field :address, class:"col-5", :placeholder => "東京都渋谷区代々木神園町0-0" %>
-        </div>
-        <div>
-           <%= f.label :宛名, class:"control-label col-3" %>
-           <%= f.text_field :name, class:"col-2", :placeholder => "令和道子" %>
-        </div>
-      </div>
-    </div>
+
     <div class="row justify-content-center">
       <%= f.submit "確認画面へ進む", class: "btn btn-primary mt-5" %>
     </div>

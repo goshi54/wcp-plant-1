@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+  get 'order_details/admin'
   scope module: :public do
   root to: "homes#top"
   get 'customers/my_page' => 'customers#show'
   get 'customers/edit'
   patch 'customers/update'
+
+   get 'customers/my_page' => 'customers#show'
+   get 'customers/leave' => 'customers#leave'
+   patch 'customers/withdraw' => 'customers#withdraw'
 
     get 'customers/unsubscribe'
     patch 'customers/withdraw'
@@ -35,6 +40,9 @@ devise_for :customers, path: "", skip: [:passwords,], controllers: {
 }
 
    get "/about" => "public/homes#about"
+   get 'customers/my_page' => 'customers#show'
+   get 'customers/leave' => 'customers#leave'
+   patch 'customers/withdraw' => 'customers#withdraw'
 
   namespace :admin do
     root to: "homes#top"

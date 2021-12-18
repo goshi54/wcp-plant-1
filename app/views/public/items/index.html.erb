@@ -14,7 +14,7 @@
             <% if item.is_active == false %>
               <p class="text-danger">売り切れ</p>
             <% else %>
-              <p>￥<%= (item.price * 1.1) %></p>
+              <p>￥<%= (item.price * 1.1).round(0) %></p>
             <% end %>
 
           </div>

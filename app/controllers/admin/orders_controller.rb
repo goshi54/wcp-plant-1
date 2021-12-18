@@ -3,9 +3,11 @@ class Admin::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @orders = Order.where(order_id: params[:id])
+    @order_details = OrderDetail.where(order_id: params[:id])
     @order_total = 0
-    @order_total += (order.price * order.quantity)
+    @order_details.each do |o|
+    @order_total += (o.price * o.quantity)
+   end
   end
 
 

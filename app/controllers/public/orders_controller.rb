@@ -8,29 +8,28 @@ class Public::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order.cost = 800 #送料
-    @order_products_price = (@order.total_price.to_i - @order.cost)
+    @order_items_price = (@order.total_price.to_i - @order.cost)
 
   end
 
   def create
-    carts = current_customer.carts.all
     @order = current_customer.orders.new(order_params)
     @carts_all = current_customer.carts.all
     @total = @carts_all.inject(0) { |sum, item| sum + (item.sum_of_price*1.1).floor } # カートに入ってる商品の合計金額
     @order.cost = 800 #送料
     @order.total_price = (@total.to_i + @order.cost)
-    if carts.present?
-      if @order.save
-        carts.each do |cart|
-          order = Order.new
-          order.item_id = cart.item_id
-          order_id = @order.id
-          #order.quantity = cart.quantity
-          #order.price = cart.item.price*1.1
-          order.save
+    if @carts_all.present?
+      if @order.save!
+        @carts_all.each do |cart|
+          order_detail = OrderDetail.new
+          order_detail.item_id = cart.item_id
+          order_detail.order_id = @order.id
+          order_detail.quantity = cart.quantity
+          order_detail.price = cart.item.price*1.1
+          order_detail.save!
         end
         redirect_to complete_orders_path
-        carts.destroy_all
+        @carts_all.destroy_all
 
       else
         @order = Order.new(order_params)

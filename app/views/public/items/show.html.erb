@@ -25,12 +25,11 @@
             <%= f.hidden_field :customer_id, :value => current_customer.id %>
             <%= f.hidden_field :item_id, :value => @item.id %>
             <%= f.submit "カートに入れる", class:"ml-5 mt-4 btn btn-success" %>
+            <%= link_to "コメントを見る", comments_path(item_id: @item.id), class:"ml-8 mt-4 btn btn-primary" %>
           <% end %>
         <% end %>
       <% end %>
-      <div class="col-lg-3 mt-3">
-       <%= link_to "コメントを見る", comments_path(item_id: @item.id), class:"btn btn-sm btn-primary" %>
-      </div>
+
     </div>
 
   </div>

@@ -32,6 +32,11 @@ class DeviseCreateCustomers < ActiveRecord::Migration[5.2]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      t.string :name_kana
+      t.string :postal_code
+      t.string :address
+      t.string :phone_number
+      t.boolean :is_active
       t.string :name
 
       t.timestamps null: false

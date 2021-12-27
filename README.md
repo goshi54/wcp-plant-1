@@ -1,24 +1,30 @@
-# README
+# 家庭菜園ショップサイト
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## サイト概要
+コロナ禍により自宅で可能な趣味などが流行いたしました。ゲームや動画サイトだけでなく自宅で自然を感じることができるを念頭に初心者におすすめの植物などを購入できるサイトです。
+植物の苗や種の販売、発送の機能を中心とするサイトになっており、初めての家庭菜園におすすめの植物の紹介やそれに対するユーザーの口コミなどを掲載するページも掲載しています。
 
-* Ruby version
+### サイトテーマ
+初めての家庭菜園チャレンジサイト
 
-* System dependencies
+### テーマを選んだ理由
+自宅でできる趣味をもっと広げたい思いと、手軽に毎日の楽しみを感じていただきたい想いからサイトを開発しようと考えました。
 
-* Configuration
+### ターゲットユーザ
+家庭菜園を始めたい人向け。
 
-* Database creation
+### 主な利用シーン
+家庭菜園を始めてみたいが何からしていいかわからない時や、新しい趣味を発見したい時など
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## チャレンジ要素一覧
+https://docs.google.com/spreadsheets/d/1qcYnKeaVxq6YGuDaKFMTk3AS2H2FxKe_Wiipg5sjqts/edit#gid=566224576
 
-* Deployment instructions
-
-* ...
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
